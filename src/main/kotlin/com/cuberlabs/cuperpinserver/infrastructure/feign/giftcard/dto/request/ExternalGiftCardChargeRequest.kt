@@ -1,3 +1,8 @@
 package com.cuberlabs.cuperpinserver.infrastructure.feign.giftcard.dto.request
 
-data class ExternalGiftCardChargeRequest()
+import java.util.UUID
+
+data class ExternalGiftCardChargeRequest(
+    val giftCardId: UUID,
+    val giftCode: String
+)
