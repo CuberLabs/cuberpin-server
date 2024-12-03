@@ -40,7 +40,8 @@ class GiftCardCharge(
     var chargeStatus: ChargeStatus = chargeStatus
         protected set
 
-    @OneToMany(mappedBy = "giftCardCharge", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @OneToMany
+    @JoinColumn(name = "gift_card_id")
     var giftCards: List<GiftCard> = giftCards
         protected set
 

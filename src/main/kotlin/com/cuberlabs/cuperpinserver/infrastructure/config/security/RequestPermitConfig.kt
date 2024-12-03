@@ -11,13 +11,8 @@ class RequestPermitConfig : SecurityConfigurerAdapter<DefaultSecurityFilterChain
 
     override fun configure(builder: HttpSecurity) {
         builder.authorizeRequests().run {
-            requestMatchers(CorsUtils::isCorsRequest).permitAll()
-                .antMatchers("/v1/team").permitAll()
-                .antMatchers("/v1/auth/**").permitAll()
-                .antMatchers("/v1/deploy/**/approve").permitAll()
-                .antMatchers(("/v1/container/sync")).permitAll()
-                .antMatchers("/v1/logs").permitAll()
-                .antMatchers("/v2/container/**/**/sync-domain").permitAll()
+            antMatchers("/charge").permitAll()
+            antMatchers("/gift-card/status/**").permitAll()
             anyRequest().authenticated()
         }
     }

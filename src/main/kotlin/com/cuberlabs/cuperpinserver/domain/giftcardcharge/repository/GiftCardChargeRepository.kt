@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.UUID
 
 interface GiftCardChargeRepository : JpaRepository<GiftCardCharge, UUID> {
-    fun findByGiftCardsIn(giftCard: GiftCard): GiftCardCharge?
+    fun findByGiftCards(giftCard: GiftCard): GiftCardCharge?
 }

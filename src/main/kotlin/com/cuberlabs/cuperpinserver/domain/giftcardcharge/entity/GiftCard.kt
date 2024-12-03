@@ -1,5 +1,6 @@
 package com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity
 
+import com.cuberlabs.cuperpinserver.domain.BaseUUIDEntity
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.ChargeStatus
 import java.math.BigDecimal
 import java.util.UUID
@@ -11,11 +12,7 @@ class GiftCard(
     giftCode: String,
     amount: BigDecimal,
     status: ChargeStatus
-) {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: UUID = id
-
+): BaseUUIDEntity(id) {
     @Column(name = "gift_code", nullable = false)
     val giftCode: String = giftCode
 

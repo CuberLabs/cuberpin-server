@@ -17,6 +17,12 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
 }
 
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${DependencyVersions.SPRING_CLOUD_VERSION}")
+    }
+}
+
 repositories {
     mavenCentral()
 }

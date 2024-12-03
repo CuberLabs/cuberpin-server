@@ -19,7 +19,7 @@ class GiftCardService(
         val giftCard = giftCardRepository.findByIdOrNull(giftCardUUID) ?: throw BusinessLogicException.GIFT_CARD_NOT_FOUND
         giftCard.updateAmount(req.amount)
 
-        val giftCardCharge = giftCardChargeRepository.findByGiftCardsIn(giftCard) ?: throw BusinessLogicException.GIFT_CARD_CHARGE_NOT_FOUND
+        val giftCardCharge = giftCardChargeRepository.findByGiftCards(giftCard) ?: throw BusinessLogicException.GIFT_CARD_CHARGE_NOT_FOUND
         giftCardCharge.updateTotalChargeStatus()
     }
 }

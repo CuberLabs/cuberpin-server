@@ -19,13 +19,14 @@ spring:
       maximum-pool-size: 400
       minimum-idle: 100
       connection-timeout: 2000
-  jackson:
-    property-naming-strategy: SNAKE_CASE
 
 management:
   endpoint:
     health:
       show-details: always
+
+url:
+  gift-card: http://localhost:8081
 
 redis:
   host: ${REDIS_HOST:localhost}
