@@ -35,6 +35,7 @@ class BusinessLogicException(
     companion object {
         val USER_NOT_FOUND = BusinessLogicException(ErrorCodePrefixSuffix.XXX_NOT_FOUND, DomainNames.USER)
         val GIFT_CARD_NOT_FOUND = BusinessLogicException(ErrorCodePrefixSuffix.XXX_NOT_FOUND, DomainNames.GIFT_CARD)
+        val GIFT_CARD_CHARGE_NOT_FOUND = BusinessLogicException(ErrorCodePrefixSuffix.XXX_NOT_FOUND, DomainNames.GIFT_CARD_CHARGE)
     }
 }
 

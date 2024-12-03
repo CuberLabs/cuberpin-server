@@ -5,5 +5,6 @@ enum class DomainNames(
     val lowCaseValue: String
 ) {
     USER("User", "user"),
-    GIFT_CARD("GiftCard", "gift_card")
+    GIFT_CARD("GiftCard", "gift_card"),
+    GIFT_CARD_CHARGE("GiftCardCharge", "gift_card_charge")
 }

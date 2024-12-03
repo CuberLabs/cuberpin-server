@@ -28,5 +28,9 @@ class GiftCard(
 
     fun updateAmount(amount: BigDecimal) {
         this.amount = amount
+
+        if(amount == BigDecimal(0) || amount < BigDecimal(0)) {
+            status = ChargeStatus.FAILED
+        }
     }
 }

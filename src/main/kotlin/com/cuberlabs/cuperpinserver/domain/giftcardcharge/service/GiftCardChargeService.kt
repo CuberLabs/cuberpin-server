@@ -1,6 +1,7 @@
 package com.cuberlabs.cuperpinserver.domain.giftcardcharge.service
 
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.request.GiftCardChargeRequest
+import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.request.UpdateGiftCardStatusRequest
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.GiftCard
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.GiftCardCharge
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.ChargeStatus
@@ -52,9 +53,11 @@ class GiftCardChargeService(
     }
 
     @Transactional
-    fun updateGiftCardStatus(giftCardUUID: UUID, amount: BigDecimal) {
+    fun updateGiftCardStatus(giftCardUUID: UUID, req: UpdateGiftCardStatusRequest) {
         val giftCard = giftCardRepository.findByIdOrNull(giftCardUUID) ?: throw BusinessLogicException.GIFT_CARD_NOT_FOUND
-        giftCard.updateAmount(amount)
+        giftCard.updateAmount(req.amount)
 
+        val giftCardCharge = giftCardChargeRepository.findByGiftCardsIn(giftCard) ?: throw BusinessLogicException.GIFT_CARD_CHARGE_NOT_FOUND
+        giftCardCharge.updateTotalChargeStatus()
     }
 }

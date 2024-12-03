@@ -1,9 +1,13 @@
 package com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity
 
+import com.cuberlabs.cuperpinserver.domain.BaseTimeEntity
 import com.cuberlabs.cuperpinserver.domain.BaseUUIDEntity
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.Bank
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.ChargeStatus
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.LastModifiedDate
 import java.math.BigDecimal
+import java.time.LocalDateTime
 import java.util.UUID
 import javax.persistence.*
 
@@ -15,7 +19,7 @@ class GiftCardCharge(
     accountNumber: String,
     chargeStatus: ChargeStatus,
     giftCards: List<GiftCard>,
-    totalAmount: BigDecimal
+    totalAmount: BigDecimal,
 ) : BaseUUIDEntity(id) {
 
     @Enumerated(EnumType.STRING)
@@ -44,10 +48,11 @@ class GiftCardCharge(
     var totalAmount: BigDecimal = totalAmount
         protected set
 
-    // 상태 업데이트 메서드
-    fun updateChargeStatus(newStatus: ChargeStatus) {
-        chargeStatus = newStatus
-    }
+    @CreatedDate
+    var createdAt: LocalDateTime = LocalDateTime.now()
+
+    @LastModifiedDate
+    var updatedAt: LocalDateTime = LocalDateTime.now()
 
     // 상품권 금액 합산 후 전체 금액 업데이트
     fun updateTotalAmount() {
@@ -63,5 +68,7 @@ class GiftCardCharge(
             giftCards.any { it.status == ChargeStatus.FAILED }
                     and giftCards.any { it.status == ChargeStatus.COMPLETED } -> chargeStatus = ChargeStatus.PARTIALLY_DEPOSITED
         }
+
+        updateTotalAmount()
     }
 }
