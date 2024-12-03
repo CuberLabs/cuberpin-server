@@ -18,6 +18,7 @@ class GiftCardService(
     fun updateGiftCardStatus(giftCardUUID: UUID, req: UpdateGiftCardStatusRequest) {
         val giftCard = giftCardRepository.findByIdOrNull(giftCardUUID) ?: throw BusinessLogicException.GIFT_CARD_NOT_FOUND
         giftCard.updateAmount(req.amount)
+        giftCardRepository.save(giftCard)
 
         val giftCardCharge = giftCardChargeRepository.findByGiftCards(giftCard) ?: throw BusinessLogicException.GIFT_CARD_CHARGE_NOT_FOUND
         giftCardCharge.updateTotalChargeStatus()
