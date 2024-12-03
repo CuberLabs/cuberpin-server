@@ -4,5 +4,5 @@ enum class ChargeStatus {
     PENDING,
     COMPLETED,
     FAILED,
-    PARTIAL_PAYMENT
+    PARTIALLY_DEPOSITED // 일부 입금
 }

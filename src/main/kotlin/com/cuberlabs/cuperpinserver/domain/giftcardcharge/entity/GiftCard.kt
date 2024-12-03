@@ -1,31 +1,32 @@
 package com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity
 
-import com.cuberlabs.cuperpinserver.domain.BaseUUIDEntity
-import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.GiftCardStatus
-import java.util.*
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToOne
+import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.ChargeStatus
+import java.math.BigDecimal
+import java.util.UUID
+import javax.persistence.*
 
 @Entity
 class GiftCard(
-    id: UUID?,
+    id: UUID,
     giftCode: String,
-    giftCardCharge: GiftCardCharge,
-    giftCardStatus: GiftCardStatus
-): BaseUUIDEntity(id) {
+    amount: BigDecimal,
+    status: ChargeStatus
+) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: UUID = id
+
     @Column(name = "gift_code", nullable = false)
-    var giftCode: String = giftCode
-        protected set
+    val giftCode: String = giftCode
 
-    @Column(name = "gift_card_status", nullable = false)
-    var giftCardStatus: GiftCardStatus = giftCardStatus
-        protected set
+    @Column(name = "amount", nullable = false)
+    var amount: BigDecimal = amount
 
-    @ManyToOne
-    @JoinColumn(name = "gift_card_charge_id")
-    var giftCardCharge: GiftCardCharge = giftCardCharge
-        protected set
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    var status: ChargeStatus = status
+
+    fun updateAmount(amount: BigDecimal) {
+        this.amount = amount
+    }
 }
-

@@ -16,7 +16,8 @@ class GiftCardCharge(
     chargeStatus: ChargeStatus,
     giftCards: List<GiftCard>,
     totalAmount: BigDecimal
-): BaseUUIDEntity(id) {
+) : BaseUUIDEntity(id) {
+
     @Enumerated(EnumType.STRING)
     @Column(name = "bank", nullable = false)
     var bank: Bank = bank
@@ -30,15 +31,37 @@ class GiftCardCharge(
     var accountNumber: String = accountNumber
         protected set
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "charge_status", nullable = false)
     var chargeStatus: ChargeStatus = chargeStatus
         protected set
 
-    @OneToMany(mappedBy = "giftCardCharge")
+    @OneToMany(mappedBy = "giftCardCharge", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var giftCards: List<GiftCard> = giftCards
         protected set
 
     @Column(name = "total_amount", nullable = false)
     var totalAmount: BigDecimal = totalAmount
         protected set
+
+    // 상태 업데이트 메서드
+    fun updateChargeStatus(newStatus: ChargeStatus) {
+        chargeStatus = newStatus
+    }
+
+    // 상품권 금액 합산 후 전체 금액 업데이트
+    fun updateTotalAmount() {
+        totalAmount = giftCards.sumOf { it.amount }
+    }
+
+    // 전체 상품권 요청 상태에 따라 chargeStatus를 업데이트
+    fun updateTotalChargeStatus() {
+        when {
+            giftCards.any { it.status == ChargeStatus.PENDING } -> chargeStatus = ChargeStatus.PENDING
+            giftCards.all { it.status == ChargeStatus.COMPLETED } -> chargeStatus = ChargeStatus.COMPLETED
+            giftCards.all { it.status == ChargeStatus.FAILED } -> chargeStatus = ChargeStatus.FAILED
+            giftCards.any { it.status == ChargeStatus.FAILED }
+                    and giftCards.any { it.status == ChargeStatus.COMPLETED } -> chargeStatus = ChargeStatus.PARTIALLY_DEPOSITED
+        }
+    }
 }
