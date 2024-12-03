@@ -31,6 +31,8 @@ class GiftCard(
 
         if(amount == BigDecimal(0) || amount < BigDecimal(0)) {
             status = ChargeStatus.FAILED
+        } else {
+            status = ChargeStatus.COMPLETED
         }
     }
 }
