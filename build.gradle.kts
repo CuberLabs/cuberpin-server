@@ -71,25 +71,6 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
-    // vault
-    implementation("com.bettercloud:vault-java-driver:5.1.0")
-
-    // kubernetes
-    implementation("io.kubernetes:client-java:15.0.1")
-    implementation("software.amazon.awssdk:sts:2.17.64")
-
-    implementation("org.springframework.boot:spring-boot-starter-websocket:2.7.18")
-
-    // OpenTelemetry && gRPC
-    implementation(platform("org.springframework.boot:spring-boot-dependencies:${project.ext["springBootVersion"]}"))
-    implementation("io.opentelemetry.proto:opentelemetry-proto:1.3.2-alpha")
-    implementation("io.micrometer:micrometer-core")
-
-    implementation("org.mapstruct:mapstruct:1.5.3.Final")
-    kapt("org.mapstruct:mapstruct-processor:1.5.3.Final")
-    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-
-
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }

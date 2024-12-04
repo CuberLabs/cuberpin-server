@@ -1,13 +1,11 @@
 package com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller
 
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.request.GiftCardChargeRequest
+import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.response.GiftCardChargeHistory
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.service.GiftCardChargeService
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
-@RequestMapping("/charge")
+@RequestMapping("/charges")
 @RestController
 class GiftCardChargeController(
     private val giftCardChargeService: GiftCardChargeService
@@ -18,5 +16,13 @@ class GiftCardChargeController(
         giftCardChargeRequest: GiftCardChargeRequest
     ) {
         giftCardChargeService.requestGiftCardCharge(giftCardChargeRequest)
+    }
+
+    @GetMapping
+    fun giftCardChargeHistoryList(
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "10") size: Int
+    ): List<GiftCardChargeHistory> {
+        return giftCardChargeService.getChargeHistory(page, size)
     }
 }

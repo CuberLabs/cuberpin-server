@@ -11,7 +11,7 @@ class RequestPermitConfig : SecurityConfigurerAdapter<DefaultSecurityFilterChain
 
     override fun configure(builder: HttpSecurity) {
         builder.authorizeRequests().run {
-            antMatchers("/charge").permitAll()
+            antMatchers("/charges").permitAll()
             antMatchers("/gift-card/status/**").permitAll()
             anyRequest().authenticated()
         }

@@ -22,7 +22,8 @@ class GiftCardCharge(
     giftCards: List<GiftCard>,
     totalAmount: BigDecimal,
     depositAmount: BigDecimal,
-    giftCardType: GiftCardType
+    giftCardType: GiftCardType,
+    phoneNumber: String
 ) : BaseUUIDEntity(id) {
 
     @Enumerated(EnumType.STRING)
@@ -58,6 +59,10 @@ class GiftCardCharge(
 
     @Column(name = "deposit_amount", nullable = false)
     var depositAmount: BigDecimal = depositAmount
+        protected set
+
+    @Column(name = "phone_number", nullable = false)
+    var phoneNumber: String = phoneNumber
         protected set
 
     @CreatedDate
