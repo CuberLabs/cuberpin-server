@@ -1,6 +1,7 @@
 package com.cuberlabs.cuperpinserver.domain.giftcardcharge.service
 
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.request.UpdateGiftCardStatusRequest
+import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.ChargeStatus
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.repository.GiftCardChargeRepository
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.repository.GiftCardRepository
 import com.cuberlabs.cuperpinserver.infrastructure.exception.BusinessLogicException
@@ -22,5 +23,9 @@ class GiftCardService(
 
         val giftCardCharge = giftCardChargeRepository.findByGiftCards(giftCard) ?: throw BusinessLogicException.GIFT_CARD_CHARGE_NOT_FOUND
         giftCardCharge.updateTotalChargeStatus()
+
+        if(giftCardCharge.chargeStatus == ChargeStatus.COMPLETED || giftCardCharge.chargeStatus == ChargeStatus.PARTIALLY_DEPOSITED) {
+            giftCardCharge.calculateDepositAmount()
+        }
     }
 }

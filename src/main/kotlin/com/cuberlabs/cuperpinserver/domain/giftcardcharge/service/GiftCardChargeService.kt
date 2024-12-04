@@ -41,7 +41,9 @@ class GiftCardChargeService(
                 accountNumber = bankAccountNumber,
                 chargeStatus = ChargeStatus.PENDING,
                 giftCards = giftCards,
-                totalAmount = BigDecimal(0)
+                totalAmount = BigDecimal(0),
+                depositAmount = BigDecimal(0),
+                giftCardType = giftCardType
             )
         }
 
@@ -51,6 +53,4 @@ class GiftCardChargeService(
             giftCardCharger.charge(it)
         }
     }
-
-
 }

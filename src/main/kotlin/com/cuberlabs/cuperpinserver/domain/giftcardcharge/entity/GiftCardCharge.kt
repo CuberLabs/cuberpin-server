@@ -4,6 +4,7 @@ import com.cuberlabs.cuperpinserver.domain.BaseTimeEntity
 import com.cuberlabs.cuperpinserver.domain.BaseUUIDEntity
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.Bank
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.ChargeStatus
+import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.GiftCardType
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import java.math.BigDecimal
@@ -20,6 +21,8 @@ class GiftCardCharge(
     chargeStatus: ChargeStatus,
     giftCards: List<GiftCard>,
     totalAmount: BigDecimal,
+    depositAmount: BigDecimal,
+    giftCardType: GiftCardType
 ) : BaseUUIDEntity(id) {
 
     @Enumerated(EnumType.STRING)
@@ -49,11 +52,29 @@ class GiftCardCharge(
     var totalAmount: BigDecimal = totalAmount
         protected set
 
+    @Column(name = "gift_card_type", nullable = false)
+    var giftCardType: GiftCardType = giftCardType
+        protected set
+
+    @Column(name = "deposit_amount", nullable = false)
+    var depositAmount: BigDecimal = depositAmount
+        protected set
+
     @CreatedDate
     var createdAt: LocalDateTime = LocalDateTime.now()
 
     @LastModifiedDate
     var updatedAt: LocalDateTime = LocalDateTime.now()
+
+    companion object {
+        val TRANSFER_FEE = BigDecimal(500)
+    }
+
+    fun calculateDepositAmount() {
+        when(giftCardType) {
+            GiftCardType.CULTURE -> depositAmount = giftCards.sumOf { it.amount } * BigDecimal(GiftCardFee.CULTURE_LAND) - TRANSFER_FEE
+        }
+    }
 
     // 상품권 금액 합산 후 전체 금액 업데이트
     fun updateTotalAmount() {
@@ -69,7 +90,6 @@ class GiftCardCharge(
             giftCards.any { it.status == ChargeStatus.FAILED }
                     and giftCards.any { it.status == ChargeStatus.COMPLETED } -> chargeStatus = ChargeStatus.PARTIALLY_DEPOSITED
         }
-
         updateTotalAmount()
     }
 }
