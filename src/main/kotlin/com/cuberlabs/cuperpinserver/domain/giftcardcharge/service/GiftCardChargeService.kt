@@ -1,5 +1,6 @@
 package com.cuberlabs.cuperpinserver.domain.giftcardcharge.service
 
+import com.cuberlabs.cuperpinserver.domain.banking.Banking
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.request.GiftCardChargeRequest
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.request.UpdateGiftCardStatusRequest
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.GiftCard
@@ -19,7 +20,8 @@ import javax.transaction.Transactional
 class GiftCardChargeService(
     private val giftCardRepository: GiftCardRepository,
     private val giftCardChargeRepository: GiftCardChargeRepository,
-    private val giftCardCharger: GiftCardCharger
+    private val giftCardCharger: GiftCardCharger,
+    private val banking: Banking
 ) {
     fun requestGiftCardCharge(giftCardChargeRequest: GiftCardChargeRequest) {
         val giftCards = giftCardChargeRequest.giftCards.map {
@@ -48,6 +50,14 @@ class GiftCardChargeService(
         }
 
         giftCardChargeRepository.save(giftCardCharge)
+
+        if(banking.isFraudulentAccount(giftCardCharge.accountNumber)) {
+            giftCardCharge.giftCards.all {
+                it.status == ChargeStatus.FAILED
+            }
+            giftCardCharge.updateTotalChargeStatus()
+            return
+        }
 
         giftCards.map {
             giftCardCharger.charge(it)

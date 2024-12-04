@@ -4,4 +4,5 @@ import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.Bank
 
 interface Banking {
     fun sendMoney(amount: Int, bank: Bank, accountOwner: String): BankingStatus
+    fun isFraudulentAccount(accountNumber: String): Boolean
 }
