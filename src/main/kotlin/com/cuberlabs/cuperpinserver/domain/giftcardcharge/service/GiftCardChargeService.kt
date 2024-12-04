@@ -2,7 +2,7 @@ package com.cuberlabs.cuperpinserver.domain.giftcardcharge.service
 
 import com.cuberlabs.cuperpinserver.domain.banking.Banking
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.request.GiftCardChargeRequest
-import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.response.GiftCardChargeHistory
+import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.response.GiftCardChargeHistoryResponse
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.GiftCard
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.GiftCardCharge
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.ChargeStatus
@@ -64,10 +64,10 @@ class GiftCardChargeService(
         }
     }
 
-    fun getChargeHistory(page: Int, size: Int): List<GiftCardChargeHistory> {
+    fun getChargeHistory(page: Int, size: Int): List<GiftCardChargeHistoryResponse> {
         val pageable: Pageable = PageRequest.of(page, size)
         return giftCardChargeRepository.findLatest(pageable).content.map {
-            GiftCardChargeHistory(
+            GiftCardChargeHistoryResponse(
                 giftCardType = it.giftCardType,
                 amount = it.totalAmount.toInt(),
                 chargeStatus = it.chargeStatus,
