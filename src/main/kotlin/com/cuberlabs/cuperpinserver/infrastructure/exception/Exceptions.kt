@@ -36,6 +36,7 @@ class BusinessLogicException(
         val USER_NOT_FOUND = BusinessLogicException(ErrorCodePrefixSuffix.XXX_NOT_FOUND, DomainNames.USER)
         val GIFT_CARD_NOT_FOUND = BusinessLogicException(ErrorCodePrefixSuffix.XXX_NOT_FOUND, DomainNames.GIFT_CARD)
         val GIFT_CARD_CHARGE_NOT_FOUND = BusinessLogicException(ErrorCodePrefixSuffix.XXX_NOT_FOUND, DomainNames.GIFT_CARD_CHARGE)
+        val USER_VALIDATION_UNAUTHORIZED = BusinessLogicException(ErrorCodePrefixSuffix.XXX_PERMISSION_DENIED, DomainNames.USER)
     }
 }
 

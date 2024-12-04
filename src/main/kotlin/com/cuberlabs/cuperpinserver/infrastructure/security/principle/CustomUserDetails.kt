@@ -13,7 +13,7 @@ class CustomUserDetails(
 
     override fun getPassword(): String? = null
 
-    override fun getUsername(): String = user.accountId
+    override fun getUsername(): String = user.phoneNumber
 
     override fun isAccountNonExpired(): Boolean = true
 

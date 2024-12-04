@@ -1,4 +1,7 @@
 package com.cuberlabs.cuperpinserver.domain.user.controller.dto.response
 
-class LoginResponse {
-}
+data class LoginResponse(
+    val accessToken: String,
+    val refreshToken: String
+) {}
+

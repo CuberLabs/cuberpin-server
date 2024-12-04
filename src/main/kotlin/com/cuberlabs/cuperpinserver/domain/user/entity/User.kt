@@ -8,17 +8,12 @@ import javax.persistence.Entity
 @Entity
 class User(
     id: UUID?,
-    accountId: String,
     name: String,
     password: String,
     phoneNumber: String
 ): BaseUUIDEntity(id) {
     @Column(name = "name", nullable = false)
     var name: String = name
-        protected set
-
-    @Column(name = "account_id", nullable = false)
-    var accountId: String = accountId
         protected set
 
     @Column(name = "password", nullable = false)
