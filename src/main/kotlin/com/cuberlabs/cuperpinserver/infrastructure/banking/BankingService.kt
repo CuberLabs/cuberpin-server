@@ -15,6 +15,7 @@ class BankingService(): Banking {
     }
 
     override fun isFraudulentAccount(accountNumber: String): Boolean {
-       return false
+        // Not yet implemented
+        return false
     }
 }
