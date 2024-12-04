@@ -1,4 +1,4 @@
-package com.cuberlabs.cuperpinserver.domain.message
+package com.cuberlabs.cuperpinserver.domain.alert
 
 import com.cuberlabs.cuperpinserver.domain.banking.BankingStatus
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.GiftCardCharge
