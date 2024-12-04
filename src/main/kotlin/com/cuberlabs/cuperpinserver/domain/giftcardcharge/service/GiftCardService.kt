@@ -1,5 +1,6 @@
 package com.cuberlabs.cuperpinserver.domain.giftcardcharge.service
 
+import com.cuberlabs.cuperpinserver.domain.banking.Banking
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.request.UpdateGiftCardStatusRequest
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.ChargeStatus
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.repository.GiftCardChargeRepository

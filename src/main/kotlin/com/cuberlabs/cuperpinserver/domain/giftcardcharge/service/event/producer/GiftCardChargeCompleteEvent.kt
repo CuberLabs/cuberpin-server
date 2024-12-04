@@ -1,4 +1,4 @@
-package com.cuberlabs.cuperpinserver.domain.giftcardcharge.service.event
+package com.cuberlabs.cuperpinserver.domain.giftcardcharge.service.event.producer
 
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.GiftCardCharge
 
