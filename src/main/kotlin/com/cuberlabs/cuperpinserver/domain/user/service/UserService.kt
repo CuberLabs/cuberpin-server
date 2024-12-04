@@ -6,7 +6,7 @@ import com.cuberlabs.cuperpinserver.domain.user.controller.dto.request.CodeValid
 import com.cuberlabs.cuperpinserver.domain.user.controller.dto.request.LoginRequest
 import com.cuberlabs.cuperpinserver.domain.user.controller.dto.request.SendValidationCodeRequest
 import com.cuberlabs.cuperpinserver.domain.user.controller.dto.request.SignupRequest
-import com.cuberlabs.cuperpinserver.domain.user.controller.dto.response.LoginResponse
+import com.cuberlabs.cuperpinserver.domain.user.controller.dto.response.TokenResponse
 import com.cuberlabs.cuperpinserver.domain.user.entity.User
 import com.cuberlabs.cuperpinserver.domain.user.entity.UserValidationCheck
 import com.cuberlabs.cuperpinserver.domain.user.repository.UserRepository
@@ -53,7 +53,7 @@ class UserService(
         } ?: throw AuthenticationException.UNAUTHORIZED
     }
 
-    fun signup(req: SignupRequest) {
+    fun signup(req: SignupRequest): TokenResponse {
         val validationCheck = req.run {
             userValCheckRepository.findByIdOrNull(req.phoneNumber) ?: throw AuthenticationException.UNAUTHORIZED
         }
@@ -62,7 +62,7 @@ class UserService(
             throw AuthenticationException.UNAUTHORIZED
         }
 
-        req.run {
+        val user = req.run {
             userRepository.save(
                 User(
                     id = UUID.randomUUID(),
@@ -72,16 +72,23 @@ class UserService(
                 )
             )
         }
+
+        return jwtService.generateTokens(user.phoneNumber).run {
+            TokenResponse(
+                accessToken = first,
+                refreshToken = second
+            )
+        }
     }
 
-    fun login(req: LoginRequest): LoginResponse {
+    fun login(req: LoginRequest): TokenResponse {
         val user = userRepository.findByPhoneNumber(req.phoneNumber) ?: throw BusinessLogicException.USER_NOT_FOUND
         if(!bCryptPasswordEncoder.matches(req.password, user.password)) {
             throw AuthenticationException.UNAUTHORIZED
         }
 
         return jwtService.generateTokens(user.phoneNumber).run {
-            LoginResponse(
+            TokenResponse(
                 accessToken = first,
                 refreshToken = second
             )
