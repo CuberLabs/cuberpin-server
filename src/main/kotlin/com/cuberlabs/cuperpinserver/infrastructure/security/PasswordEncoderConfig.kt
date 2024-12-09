@@ -2,13 +2,11 @@ package com.cuberlabs.cuperpinserver.infrastructure.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.stereotype.Component
+import org.springframework.security.crypto.password.PasswordEncoder
 
-
-@Component
 class PasswordEncoder {
     @Bean
-    fun passwordEncoder(): BCryptPasswordEncoder {
+    fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
     }
 }
