@@ -16,7 +16,7 @@ import com.cuberlabs.cuperpinserver.infrastructure.exception.BusinessLogicExcept
 import com.cuberlabs.cuperpinserver.infrastructure.security.jwt.JwtService
 import com.cuberlabs.cuperpinserver.infrastructure.util.NumberUtil
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 import java.util.*
 import javax.transaction.Transactional
@@ -27,7 +27,7 @@ class UserService(
     private val userValCheckRepository: UserValCheckRepository,
     private val userRepository: UserRepository,
     private val sms: Sms,
-    private val bCryptPasswordEncoder: BCryptPasswordEncoder
+    private val passwordEncoder: PasswordEncoder
 ) {
     fun sendCode(req: SendValidationCodeRequest) {
         val validationCode = NumberUtil.generateRandomNumber()
@@ -67,7 +67,7 @@ class UserService(
                 User(
                     id = UUID.randomUUID(),
                     name = name,
-                    password = bCryptPasswordEncoder.encode(password),
+                    password = passwordEncoder.encode(password),
                     phoneNumber = phoneNumber
                 )
             )
@@ -83,7 +83,7 @@ class UserService(
 
     fun login(req: LoginRequest): TokenResponse {
         val user = userRepository.findByPhoneNumber(req.phoneNumber) ?: throw BusinessLogicException.USER_NOT_FOUND
-        if(!bCryptPasswordEncoder.matches(req.password, user.password)) {
+        if(!passwordEncoder.matches(req.password, user.password)) {
             throw AuthenticationException.UNAUTHORIZED
         }
 

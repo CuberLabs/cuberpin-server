@@ -19,14 +19,16 @@ spring:
       maximum-pool-size: 400
       minimum-idle: 100
       connection-timeout: 2000
-
-management:
+  main:
+    allow-bean-definition-overriding: true
   endpoint:
     health:
       show-details: always
 
+
 url:
   gift-card: http://localhost:8081
+  nh-banking: https://developers.nonghyup.com
 
 redis:
   host: ${REDIS_HOST:localhost}
@@ -52,3 +54,10 @@ server:
     front-domain: ${FRONT_LOCAL:http://localhost:3000}
     back-domain: ${BACK_LOCAL:http://localhost:8080}
   port: ${SERVER_PORT:8080}
+
+banking:
+  nh:
+    access-token: ${NH_ACCESS_TOKEN}
+    iscd: ${NH_ISCD}
+    api-svc-cd: ${NH_API_SVC_CD}
+    fintech-apsno: ${NH_FINTECH_APSNO}

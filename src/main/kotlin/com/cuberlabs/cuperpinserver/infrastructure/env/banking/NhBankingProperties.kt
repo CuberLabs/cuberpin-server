@@ -6,8 +6,8 @@ import org.springframework.boot.context.properties.ConstructorBinding
 @ConstructorBinding
 @ConfigurationProperties("banking.nh")
 data class NhBankingProperties(
-    val Iscd: String,
+    val iscd: String,
     val fintechApsno: String,
-    val apiSvcCdn: String,
+    val apiSvcCd: String,
     val accessToken: String
 )

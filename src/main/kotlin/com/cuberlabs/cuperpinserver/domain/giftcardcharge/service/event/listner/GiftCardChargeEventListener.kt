@@ -19,7 +19,8 @@ class GiftCardChargeEventListener(
             banking.sendMoney(
                 amount = depositAmount.toInt(),
                 bank = bank,
-                accountOwner = accountOwner
+                accountOwner = accountOwner,
+                accountNumber = accountNumber,
             )
         }
 

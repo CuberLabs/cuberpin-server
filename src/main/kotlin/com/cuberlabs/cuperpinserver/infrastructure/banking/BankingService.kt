@@ -6,6 +6,7 @@ import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.Bank
 import com.cuberlabs.cuperpinserver.infrastructure.feign.nhopenbanking.NhBankingClient
 import com.cuberlabs.cuperpinserver.infrastructure.feign.nhopenbanking.dto.request.TransferOtherBankRequest
 import org.springframework.stereotype.Component
+import kotlin.random.Random
 
 @Component
 class BankingService(
@@ -19,8 +20,11 @@ class BankingService(
                 tram = amount.toString(),
                 dractOtlt = "쿠버핀",
                 mractOtlt = "쿠버핀"
-            )
+            ),
+            istuno = Random.nextInt(100000, 1000000).toString()
         )
+
+        print(response)
 
         return BankingStatus(
             isSuccess = response.responseCode == "00000",

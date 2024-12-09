@@ -18,12 +18,11 @@ class NhBankingCommonRequest(
             val currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HHmmss"))
 
             // 헤더 설정
-            template.header("ApiNm", "Test API")
             template.header("Tsymd", currentDate)
             template.header("Trtm", currentTime)
-            template.header("Iscd", nhBankingProperties.apiSvcCdn)
+            template.header("Iscd", nhBankingProperties.iscd)
             template.header("FintechApsno", nhBankingProperties.fintechApsno)
-            template.header("APISvcCd", nhBankingProperties.apiSvcCdn)
+            template.header("APISvcCd", nhBankingProperties.apiSvcCd)
             template.header("AccessToken", nhBankingProperties.accessToken)
         }
     }
