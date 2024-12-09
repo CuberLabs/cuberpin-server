@@ -1,1 +1,1 @@
-rootProject.name = "xquare-infra"
+rootProject.name = "cuberpin-server"
