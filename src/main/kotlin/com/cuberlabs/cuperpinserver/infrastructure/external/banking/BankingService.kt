@@ -1,4 +1,4 @@
-package com.cuberlabs.cuperpinserver.infrastructure.banking
+package com.cuberlabs.cuperpinserver.infrastructure.external.banking
 
 import com.cuberlabs.cuperpinserver.domain.banking.Banking
 import com.cuberlabs.cuperpinserver.domain.banking.BankingStatus

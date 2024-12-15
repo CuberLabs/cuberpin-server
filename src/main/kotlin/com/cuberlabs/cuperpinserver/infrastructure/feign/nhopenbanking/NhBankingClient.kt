@@ -1,6 +1,6 @@
 package com.cuberlabs.cuperpinserver.infrastructure.feign.nhopenbanking
 
-import com.cuberlabs.cuperpinserver.infrastructure.feign.nhopenbanking.config.NhBankingCommonRequest
+import com.cuberlabs.cuperpinserver.infrastructure.feign.nhopenbanking.dto.request.NhBankingCommonRequest
 import com.cuberlabs.cuperpinserver.infrastructure.feign.nhopenbanking.dto.request.TransferOtherBankRequest
 import com.cuberlabs.cuperpinserver.infrastructure.feign.nhopenbanking.dto.response.NhBankingCommonResponse
 import org.springframework.cloud.openfeign.FeignClient

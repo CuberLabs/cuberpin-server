@@ -1,4 +1,4 @@
-package com.cuberlabs.cuperpinserver.infrastructure.feign.nhopenbanking.config
+package com.cuberlabs.cuperpinserver.infrastructure.feign.nhopenbanking.dto.request
 
 import com.cuberlabs.cuperpinserver.infrastructure.env.banking.NhBankingProperties
 import feign.RequestInterceptor

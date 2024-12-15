@@ -71,6 +71,10 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
+    implementation("org.mindrot:jbcrypt:0.3m")
+
+    implementation("org.apache.commons:commons-lang3:3.13.0")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }

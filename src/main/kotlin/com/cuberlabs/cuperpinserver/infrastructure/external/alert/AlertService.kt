@@ -1,4 +1,4 @@
-package com.cuberlabs.cuperpinserver.infrastructure.alert
+package com.cuberlabs.cuperpinserver.infrastructure.external.alert
 
 import com.cuberlabs.cuperpinserver.domain.alert.AlertManager
 import org.springframework.stereotype.Component
