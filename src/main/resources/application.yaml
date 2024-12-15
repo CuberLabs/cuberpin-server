@@ -61,3 +61,6 @@ banking:
     iscd: ${NH_ISCD}
     api-svc-cd: ${NH_API_SVC_CD}
     fintech-apsno: ${NH_FINTECH_APSNO}
+store:
+  client-id: ${STORE_CLIENT_ID}
+  client-secret: ${STORE_CLIENT_SECRET}

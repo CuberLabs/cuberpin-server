@@ -1,10 +1,7 @@
 package com.cuberlabs.cuperpinserver.infrastructure.feign.store.dto.response
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.databind.PropertyNamingStrategies
-import com.fasterxml.jackson.databind.annotation.JsonNaming
 
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class GetProductOrdersResponse(
     val timestamp: String,
     val traceId: String,

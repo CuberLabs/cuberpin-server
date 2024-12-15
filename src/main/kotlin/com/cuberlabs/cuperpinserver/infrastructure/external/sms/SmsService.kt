@@ -1,4 +1,4 @@
-package com.cuberlabs.cuperpinserver.infrastructure.sms
+package com.cuberlabs.cuperpinserver.infrastructure.external.sms
 
 import com.cuberlabs.cuperpinserver.domain.sms.Sms
 import org.springframework.stereotype.Component

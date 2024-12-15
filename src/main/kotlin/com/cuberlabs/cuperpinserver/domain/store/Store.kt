@@ -5,11 +5,11 @@ interface Store {
         from: String,
         to: String,
         rangeType: String,
-        productOrderStatus: String,
-        claimStatuses: String,
-        placeOrderStatusType: String,
-        fulfillment: String,
-        pageSize: String,
-        page: String
+        productOrderStatus: String? = null,
+        claimStatuses: String? = null,
+        placeOrderStatusType: String? = null,
+        fulfillment: String? = null,
+        pageSize: Int,
+        page: Int
     ): List<String>
 }

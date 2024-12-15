@@ -3,7 +3,6 @@ package com.cuberlabs.cuperpinserver.infrastructure.external.store
 import com.cuberlabs.cuperpinserver.domain.store.Store
 import com.cuberlabs.cuperpinserver.infrastructure.env.store.StoreProperties
 import com.cuberlabs.cuperpinserver.infrastructure.feign.store.StoreClient
-import com.cuberlabs.cuperpinserver.infrastructure.feign.store.dto.request.GenerateTokenRequest
 import com.cuberlabs.cuperpinserver.infrastructure.feign.store.dto.request.GetProductOrdersRequest
 import org.springframework.stereotype.Service
 
@@ -16,17 +15,15 @@ class StoreService(
         val currentTimeMillis = System.currentTimeMillis()
 
         val response = storeClient.generateToken(
-            GenerateTokenRequest(
-                clientSecret = SignatureGenerator.generateHashedPassword(
-                    clientSecret = storeProperties.clientSecret,
-                    clientId = storeProperties.clientId,
-                    timestamp = currentTimeMillis.toString()
-                ),
+            clientSecretSign = SignatureGenerator.generateHashedPassword(
+                clientSecret = storeProperties.clientSecret,
                 clientId = storeProperties.clientId,
-                grantType = "client_credentials",
-                timestamp = currentTimeMillis.toString(),
-                type = "SELF"
-            )
+                timestamp = currentTimeMillis.toString()
+            ),
+            clientId = storeProperties.clientId,
+            grantType = "client_credentials",
+            timestamp = currentTimeMillis,
+            type = "SELF"
         )
 
         return response.accessToken
@@ -36,25 +33,24 @@ class StoreService(
         from: String,
         to: String,
         rangeType: String,
-        productOrderStatus: String,
-        claimStatuses: String,
-        placeOrderStatusType: String,
-        fulfillment: String,
-        pageSize: String,
-        page: String
+        productOrderStatus: String?,
+        claimStatuses: String?,
+        placeOrderStatusType: String?,
+        fulfillment: String?,
+        pageSize: Int,
+        page: Int
     ): List<String> {
         val response = storeClient.getProductOrders(
-            GetProductOrdersRequest(
-                from = from,
-                to = to,
-                rangeType = rangeType,
-                productOrderStatuses = productOrderStatus,
-                claimStatuses = claimStatuses,
-                placeOrderStatusType = placeOrderStatusType,
-                fulfillment = fulfillment,
-                pageSize = pageSize,
-                page = page
-            )
+            from = from,
+            to = to,
+            rangeType = rangeType,
+            fulfillment = fulfillment,
+            pageSize = pageSize,
+            page = page,
+            productOrderStatuses = productOrderStatus,
+            claimStatuses = claimStatuses,
+            placeOrderStatusType = placeOrderStatusType,
+            authorizationHeader = "Bearer ${generateOAuthToken()}"
         )
 
         return response.data.contents.map { it.productOrderId }

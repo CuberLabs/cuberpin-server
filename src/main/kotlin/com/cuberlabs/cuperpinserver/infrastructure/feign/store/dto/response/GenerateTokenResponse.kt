@@ -7,6 +7,6 @@ data class GenerateTokenResponse(
     val accessToken: String,
     @JsonProperty("expires_in")
     val expiresIn: Long,
-    @JsonProperty("refresh_token")
+    @JsonProperty("token_type")
     val tokenType: String,
 )
