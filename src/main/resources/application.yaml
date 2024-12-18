@@ -73,10 +73,7 @@ banking:
 store:
   client-id: ${STORE_CLIENT_ID}
   client-secret: ${STORE_CLIENT_SECRET}
-
-google:
-  api:
-    credentials:
-      path: "classpath:credentials.json"
-    pubsub:
-      topic:
+sms:
+  api-key: ${SMS_API_KEY}
+  send-phone-number: ${SMS_SEND_PHONE_NUMBER}
+  token-key: ${SMS_TOKEN_KEY}
