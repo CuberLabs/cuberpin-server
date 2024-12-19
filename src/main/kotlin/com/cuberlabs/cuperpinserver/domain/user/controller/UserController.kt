@@ -7,6 +7,7 @@ import com.cuberlabs.cuperpinserver.domain.user.controller.dto.request.SignupReq
 import com.cuberlabs.cuperpinserver.domain.user.controller.dto.response.TokenResponse
 import com.cuberlabs.cuperpinserver.domain.user.service.UserService
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -16,22 +17,25 @@ class UserController(
     private val userService: UserService
 ) {
     @PostMapping("/send-validation-code")
-    fun sendValidationCode(req: SendValidationCodeRequest) {
+    fun sendValidationCode(@RequestBody req: SendValidationCodeRequest) {
         userService.sendCode(req)
     }
 
     @PostMapping("/validation-code")
-    fun validationCode(req: CodeValidationRequest) {
+    fun validationCode(@RequestBody req: CodeValidationRequest) {
         userService.validationCode(req)
     }
 
     @PostMapping("/signup")
-    fun signup(signupRequest: SignupRequest): TokenResponse {
+    fun signup(
+        @RequestBody
+        signupRequest: SignupRequest
+    ): TokenResponse {
         return userService.signup(signupRequest)
     }
 
     @PostMapping("/login")
-    fun login(loginRequest: LoginRequest): TokenResponse {
+    fun login(@RequestBody loginRequest: LoginRequest): TokenResponse {
         return userService.login(loginRequest)
     }
 }

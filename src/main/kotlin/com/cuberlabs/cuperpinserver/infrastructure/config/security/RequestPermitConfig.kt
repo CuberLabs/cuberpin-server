@@ -13,6 +13,7 @@ class RequestPermitConfig : SecurityConfigurerAdapter<DefaultSecurityFilterChain
         builder.authorizeRequests().run {
             antMatchers("/charges").permitAll()
             antMatchers("/gift-card/status/**").permitAll()
+            antMatchers("/users/**").permitAll()
             anyRequest().authenticated()
         }
     }

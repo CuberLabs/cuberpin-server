@@ -29,6 +29,7 @@ class UserService(
     private val sms: Sms,
     private val passwordEncoder: PasswordEncoder
 ) {
+    @Transactional
     fun sendCode(req: SendValidationCodeRequest) {
         val validationCode = NumberUtil.generateRandomNumber()
         userValCheckRepository.save(UserValidationCheck(
@@ -42,21 +43,21 @@ class UserService(
 
     @Transactional
     fun validationCode(req: CodeValidationRequest) {
-        val userValidationCheck = req.run {
-            userValCheckRepository.findByPhoneNumberAndValidationCode(
-                phoneNumber = phoneNumber,
-                validationCode = validationCode
-            )
-        }
+        val userValidationCheck = userValCheckRepository.findByIdOrNull(req.phoneNumber)
+
         userValidationCheck?.let {
-            it.validationsucceed()
+            if(it.validationCode == req.validationCode) {
+                it.validationsucceed()
+            } else {
+                throw AuthenticationException.UNAUTHORIZED
+            }
         } ?: throw AuthenticationException.UNAUTHORIZED
+
+        userValCheckRepository.save(userValidationCheck)
     }
 
     fun signup(req: SignupRequest): TokenResponse {
-        val validationCheck = req.run {
-            userValCheckRepository.findByIdOrNull(req.phoneNumber) ?: throw AuthenticationException.UNAUTHORIZED
-        }
+        val validationCheck = userValCheckRepository.findByIdOrNull(req.phoneNumber) ?: throw AuthenticationException.UNAUTHORIZED
 
         if(!validationCheck.isValid) {
             throw AuthenticationException.UNAUTHORIZED
