@@ -1,6 +1,5 @@
 package com.cuberlabs.cuperpinserver.domain.giftcardcharge.service.event.listner
 
-import com.cuberlabs.cuperpinserver.domain.banking.Banking
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.service.event.producer.GiftCardChargeCompleteEvent
 import com.cuberlabs.cuperpinserver.domain.alert.AlertManager
 import com.cuberlabs.cuperpinserver.domain.alert.Messages
