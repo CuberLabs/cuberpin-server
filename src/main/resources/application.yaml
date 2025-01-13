@@ -77,3 +77,4 @@ sms:
   api-key: ${SMS_API_KEY}
   send-phone-number: ${SMS_SEND_PHONE_NUMBER}
   token-key: ${SMS_TOKEN_KEY}
+  admin-number: ${SMS_ADMIN_NUMBER}
