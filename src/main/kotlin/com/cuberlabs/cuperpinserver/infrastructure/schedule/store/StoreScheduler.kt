@@ -8,9 +8,4 @@ import org.springframework.stereotype.Component
 class StoreScheduler(
     private val storeSchedulerService: StoreSchedulerService
 ) {
-    @Scheduled(fixedRate = 3000)
-    fun scheduleTask() {
-        println("스케줄러 실행 중: ${System.currentTimeMillis()}")
-        storeSchedulerService.sendGiftCardMessage()
-    }
 }

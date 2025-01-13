@@ -16,6 +16,7 @@ class GiftCardChargeEventListener(
 ) {
     @Value("\${sms.admin-number}")
     var adminNumber: String = ""
+
     @EventListener
     fun handlerChargeCompleteEvent(event: GiftCardChargeCompleteEvent) {
         // 관리자에게 입금 요청
@@ -25,7 +26,7 @@ class GiftCardChargeEventListener(
                 SmsMessages.depositRequest(
                     bank = bank.toString(),
                     accountNumber = accountNumber,
-                    amount = depositAmount.toString()
+                    amount = depositAmount.toInt().toString()
                 )
             )
         }

@@ -12,6 +12,7 @@ class SmsService(
     private val smsClient: SmsClient
 ) : Sms {
     override fun sendMessage(destination: String, message: String) {
+        println("메세지 보냄")
         smsClient.sendSms(
             apiKey = smsProperties.apiKey,
             request = SendSmsRequest(
