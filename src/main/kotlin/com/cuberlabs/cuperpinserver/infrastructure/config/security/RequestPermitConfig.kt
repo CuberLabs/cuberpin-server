@@ -14,6 +14,7 @@ class RequestPermitConfig : SecurityConfigurerAdapter<DefaultSecurityFilterChain
             antMatchers("/charges").permitAll()
             antMatchers("/gift-card/status/**").permitAll()
             antMatchers("/users/**").permitAll()
+            antMatchers("/ws/recharge/{id}").permitAll()
             anyRequest().authenticated()
         }
     }

@@ -8,7 +8,11 @@ import org.springframework.stereotype.Component
 class GiftCardChargeEventProducer(
     private val applicationEventPublisher: ApplicationEventPublisher
 ) {
-    fun publishEvent(giftCardCharge: GiftCardCharge) {
+    fun publishCompleteEvent(giftCardCharge: GiftCardCharge) {
         applicationEventPublisher.publishEvent(GiftCardChargeCompleteEvent(giftCardCharge))
+    }
+
+    fun publishAcceptEvent(giftCardCharge: GiftCardCharge) {
+        applicationEventPublisher.publishEvent(GiftCardChargeAcceptEvent(giftCardCharge))
     }
 }

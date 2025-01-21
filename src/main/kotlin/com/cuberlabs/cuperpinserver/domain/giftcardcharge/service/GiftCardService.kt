@@ -4,7 +4,6 @@ import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.request
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.ChargeStatus
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.repository.GiftCardChargeRepository
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.repository.GiftCardRepository
-import com.cuberlabs.cuperpinserver.domain.giftcardcharge.service.event.listner.GiftCardChargeEventListener
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.service.event.producer.GiftCardChargeEventProducer
 import com.cuberlabs.cuperpinserver.infrastructure.exception.BusinessLogicException
 import org.springframework.data.repository.findByIdOrNull
@@ -27,9 +26,6 @@ class GiftCardService(
         val giftCardCharge = giftCardChargeRepository.findByGiftCards(giftCard) ?: throw BusinessLogicException.GIFT_CARD_CHARGE_NOT_FOUND
         giftCardCharge.updateTotalChargeStatus()
 
-        if(giftCardCharge.chargeStatus == ChargeStatus.COMPLETED || giftCardCharge.chargeStatus == ChargeStatus.PARTIALLY_DEPOSITED) {
-            giftCardCharge.calculateDepositAmount()
-            giftCardChargeEventProducer.publishEvent(giftCardCharge)
-        }
+        giftCardChargeEventProducer.publishCompleteEvent(giftCardCharge)
     }
 }

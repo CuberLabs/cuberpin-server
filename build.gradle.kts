@@ -75,6 +75,8 @@ dependencies {
 
     implementation("org.apache.commons:commons-lang3:3.13.0")
 
+    implementation("org.springframework.boot:spring-boot-starter-websocket")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }

@@ -2,6 +2,8 @@ package com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller
 
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.request.GiftCardChargeRequest
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.response.GiftCardChargeHistoryResponse
+import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.response.GiftCardChargeResponse
+import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.GiftCard
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.service.GiftCardChargeService
 import org.springframework.web.bind.annotation.*
 
@@ -14,8 +16,8 @@ class GiftCardChargeController(
     fun giftCardCharge(
         @RequestBody
         giftCardChargeRequest: GiftCardChargeRequest
-    ) {
-        giftCardChargeService.requestGiftCardCharge(giftCardChargeRequest)
+    ): GiftCardChargeResponse {
+        return giftCardChargeService.requestGiftCardCharge(giftCardChargeRequest)
     }
 
     @GetMapping
