@@ -11,7 +11,6 @@ import javax.persistence.MappedSuperclass
 @MappedSuperclass
 abstract class BaseUUIDEntity(
     @Id
-    @GeneratedValue(generator = "uuid4")
     @GenericGenerator(name = "uuid4", strategy = "org.hibernate.id.UUIDGenerator")
     @get:JvmName("getIdForJvm")
     @Column(
