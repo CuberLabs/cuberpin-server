@@ -27,7 +27,7 @@ spring:
 
 
 url:
-  gift-card: http://localhost:8081
+  gift-card: ${AUTO_CHARGER_ADDRESS}
   nh-banking: https://developers.nonghyup.com
 
 redis:
