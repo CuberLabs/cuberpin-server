@@ -24,7 +24,7 @@ class GiftCardService(
         giftCardRepository.save(giftCard)
 
         val giftCardCharge = giftCardChargeRepository.findByGiftCards(giftCard) ?: throw BusinessLogicException.GIFT_CARD_CHARGE_NOT_FOUND
-        giftCardCharge.updateTotalChargeStatus()
+        giftCardCharge.updateTotalChargeStatus(false)
 
         giftCardChargeEventProducer.publishCompleteEvent(giftCardCharge)
     }

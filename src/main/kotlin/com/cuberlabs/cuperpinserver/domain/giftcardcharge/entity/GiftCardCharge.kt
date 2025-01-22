@@ -87,13 +87,16 @@ class GiftCardCharge(
     }
 
     // 전체 상품권 요청 상태에 따라 chargeStatus를 업데이트
-    fun updateTotalChargeStatus() {
+    fun updateTotalChargeStatus(isDepositComplete: Boolean) {
         when {
             giftCards.any { it.status == ChargeStatus.PENDING } -> chargeStatus = ChargeStatus.PENDING
-            giftCards.all { it.status == ChargeStatus.COMPLETED } -> chargeStatus = ChargeStatus.COMPLETED
+            giftCards.all { it.status == ChargeStatus.COMPLETED } -> chargeStatus = ChargeStatus.WAITING_FOR_DEPOSIT
+            giftCards.all { it.status == ChargeStatus.COMPLETED && isDepositComplete } -> chargeStatus = ChargeStatus.COMPLETED
             giftCards.all { it.status == ChargeStatus.FAILED } -> chargeStatus = ChargeStatus.FAILED
             giftCards.any { it.status == ChargeStatus.FAILED }
-                    and giftCards.any { it.status == ChargeStatus.COMPLETED } -> chargeStatus = ChargeStatus.PARTIALLY_DEPOSITED
+                    and giftCards.any { it.status == ChargeStatus.COMPLETED } -> chargeStatus = ChargeStatus.WAITING_FOR_PARTIALLY_DEPOSITED
+            giftCards.any { it.status == ChargeStatus.FAILED }
+                    and giftCards.any { it.status == ChargeStatus.COMPLETED && isDepositComplete} -> chargeStatus = ChargeStatus.COMPLETED
         }
         updateTotalAmount()
     }
