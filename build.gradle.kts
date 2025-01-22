@@ -77,6 +77,10 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-websocket")
 
+    implementation("com.discord4j:discord4j-core:3.2.3")
+
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }

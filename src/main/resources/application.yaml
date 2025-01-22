@@ -62,3 +62,7 @@ sms:
   send-phone-number: ${SMS_SEND_PHONE_NUMBER}
   token-key: ${SMS_TOKEN_KEY}
   admin-number: ${SMS_ADMIN_NUMBER}
+
+discord:
+  bot-token: ${DISCORD_BOT_TOKEN}
+  channel-id: ${DISCORD_CHANNEL_ID}

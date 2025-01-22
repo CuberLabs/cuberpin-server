@@ -4,13 +4,16 @@ import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.request
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.response.GiftCardChargeHistoryResponse
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.controller.dto.response.GiftCardChargeResponse
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.GiftCard
+import com.cuberlabs.cuperpinserver.domain.giftcardcharge.entity.vo.Bank
 import com.cuberlabs.cuperpinserver.domain.giftcardcharge.service.GiftCardChargeService
+import com.cuberlabs.cuperpinserver.infrastructure.external.discord.DiscordMessageService
 import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/charges")
 @RestController
 class GiftCardChargeController(
-    private val giftCardChargeService: GiftCardChargeService
+    private val giftCardChargeService: GiftCardChargeService,
+    private val discordMessageService: DiscordMessageService
 ) {
     @PostMapping
     fun giftCardCharge(
