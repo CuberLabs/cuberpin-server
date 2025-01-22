@@ -77,6 +77,8 @@ class UserService(
             )
         }
 
+        userValCheckRepository.deleteById(req.phoneNumber)
+
         return jwtService.generateTokens(user.phoneNumber).run {
             TokenResponse(
                 accessToken = first,
