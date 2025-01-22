@@ -57,6 +57,9 @@ class UserService(
     }
 
     fun signup(req: SignupRequest): TokenResponse {
+        userRepository.findByPhoneNumber(req.phoneNumber)?.let {
+            throw BusinessLogicException.USER_ALREADY_EXISTS
+        }
         val validationCheck = userValCheckRepository.findByIdOrNull(req.phoneNumber) ?: throw AuthenticationException.UNAUTHORIZED
 
         if(!validationCheck.isValid) {
