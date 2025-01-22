@@ -38,6 +38,6 @@ class GiftCardChargeEventListener(
         }
 
         // 웹소켓 상태 변경
-        chargeSocketService.changeChargeStatus(event.giftCardCharge.id!!, event.giftCardCharge.chargeStatus)
+        chargeSocketService.changeChargeStatus(event.giftCardCharge.id!!, event.giftCardCharge.chargeStatus, event.giftCardCharge.depositAmount.toInt())
     }
 }

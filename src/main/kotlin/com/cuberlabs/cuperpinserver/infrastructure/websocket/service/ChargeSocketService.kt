@@ -13,7 +13,7 @@ class ChargeSocketService(
         chargeSocketHandler.notifyRechargeState(chargeId.toString(), "CHARGE ACCEPT $chargeId")
     }
 
-    fun changeChargeStatus(chargeId: UUID, chargeStatus: ChargeStatus) {
-        chargeSocketHandler.notifyRechargeState(chargeId.toString(), "CHARGE STATUS $chargeId $chargeStatus")
+    fun changeChargeStatus(chargeId: UUID, chargeStatus: ChargeStatus, amount: Int) {
+        chargeSocketHandler.notifyRechargeState(chargeId.toString(), "CHARGE STATUS $chargeId $chargeStatus $amount")
     }
 }
