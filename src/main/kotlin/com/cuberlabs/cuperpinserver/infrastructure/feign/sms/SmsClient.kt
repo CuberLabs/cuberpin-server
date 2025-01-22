@@ -14,6 +14,7 @@ interface SmsClient {
     @PostMapping("/sms/send/sms")
     fun sendSms(
         @RequestHeader("x-api-key") apiKey: String,
-        @RequestBody request: SendSmsRequest
+        @RequestBody request: SendSmsRequest,
+        @RequestHeader("x-forwarded-for") forwardedFor: String,
     )
 }

@@ -21,7 +21,8 @@ class SmsService(
                 sendPhone = smsProperties.sendPhoneNumber,
                 destPhone = destination,
                 msgType = "sms"
-            )
+            ),
+            forwardedFor = "111.222.111.222"
         )
     }
 }
