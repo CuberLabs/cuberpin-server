@@ -12,6 +12,6 @@ class WebSocketConfig(
     private val chargeSocketHandler: ChargeSocketHandler
 ) : WebSocketConfigurer {
     override fun registerWebSocketHandlers(registry: WebSocketHandlerRegistry) {
-        registry.addHandler(chargeSocketHandler, "/ws/recharge/{id}").setAllowedOrigins("*")
+        registry.addHandler(chargeSocketHandler, "/ws/charge/{id}").setAllowedOrigins("*")
     }
 }
