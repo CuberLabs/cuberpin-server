@@ -26,7 +26,7 @@ class GiftCardChargeEventListener(
         event.giftCardCharge.run {
             if (chargeStatus == ChargeStatus.COMPLETED || chargeStatus == ChargeStatus.PARTIALLY_DEPOSITED) {
                 // 관리자에게 입금 요청
-                discordMessageService.sendDepositRequestMessage(bank.fullName, accountNumber, depositAmount.toInt())
+                discordMessageService.sendDepositRequestMessage(bank.fullName, accountNumber, depositAmount.toInt(), chargeId = id!!)
                 event.giftCardCharge.run {
                     sms.sendMessage(
                         adminNumber,
