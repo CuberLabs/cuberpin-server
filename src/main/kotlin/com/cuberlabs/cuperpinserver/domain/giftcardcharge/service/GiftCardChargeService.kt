@@ -73,6 +73,7 @@ class GiftCardChargeService(
         val pageable: Pageable = PageRequest.of(page, size)
         return giftCardChargeRepository.findLatest(pageable).content.map {
             GiftCardChargeHistoryResponse(
+                name = "${it.accountOwner[0]}**",
                 giftCardType = it.giftCardType,
                 amount = it.totalAmount.toInt(),
                 chargeStatus = it.chargeStatus,
